@@ -60,6 +60,8 @@ Before choosing a format, inspect the host's actual available capabilities and u
 
 Never describe a raster image as editable. Never claim that a canvas, file, preview, or export exists unless it was created. Do not require a particular SDK, presentation library, or artifact skill. State any format or tooling limitation plainly.
 
+For any native canvas or editable-slide route, explicitly inspect the generated artifact's page or slide count before delivery. The default brief must contain exactly one page or slide. If the native result has more than one page or slide, reject that result and fall back to the next viable route (normally self-contained HTML/CSS); do not silently deliver a multi-page brief.
+
 Apply design systems in this order:
 
 1. Follow explicit user design instructions and supplied templates.

@@ -110,6 +110,9 @@ def validate_output_contract(skill_text: str, design_text: str) -> None:
         "Static preview",
         "no visual generation is available",
         "Never describe a raster image as editable",
+        "page or slide count",
+        "more than one page or slide",
+        "fall back to the next viable route",
         "references/design-reference.md",
     )
     for phrase in required_skill_phrases:

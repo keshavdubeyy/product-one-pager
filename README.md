@@ -65,9 +65,9 @@ The example is fictional and illustrative:
 
 | Surface | Status | What has been checked |
 | --- | --- | --- |
-| Claude Code plugin | Default-branch installation tested; model invocation unavailable | Claude Code 2.1.89 added the GitHub marketplace, installed the plugin from `main`, and listed it as enabled using isolated temporary configuration and cache directories. The installed skill matched the repository source. No authenticated Claude session or environment credential was available for a model run. |
-| Skills CLI | Default-branch installation tested for Codex; model invocation untested | The CLI discovered one skill from the GitHub repository and installed it into an isolated Codex project. Other target agents were not tested. |
-| HTML example and exports | Artifact generation tested; live model behavior untested | The self-contained HTML was rendered with local headless Chrome in landscape and portrait. Both PNG previews were visually inspected; both PDFs contain exactly one page at the intended aspect ratio. |
+| Claude Code plugin | Installation tested; model invocation untested | Claude Code 2.1.89 added the GitHub marketplace, installed the plugin from `main`, and listed it as enabled using isolated temporary configuration and cache directories. The installed skill matched the repository source. Claude model invocation remains untested because no authenticated Claude session or environment credential was available. |
+| Skills CLI / Codex | Installation and one live model scenario tested | The CLI installed the default-branch skill into an isolated Codex project. A fresh BerthWise / Turnaround Readiness scenario reused supplied context, produced all eleven sections, labeled unsupported assumptions, and recommended Proceed with Validation. Other target agents were not tested. |
+| Designed output routes | Native failure recovery and HTML artifact generation tested | An authenticated Codex run attempted a native Canva design, detected that it produced six slides, rejected it, and fell back to one self-contained HTML brief. Local Chrome rendering produced and visually inspected one landscape PNG and one-page PDF; the HTML reflowed at portrait width. |
 | Installable skill folder and ZIP | Structurally tested | Local scripts validate metadata, eleven required sections, the bundled design reference, local resources, and package contents. |
 | OpenAI API hosted skills | Documentation-supported; not end-to-end tested | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run has been performed. |
 | Other AI assistants | Untested fallback | Pasting `SKILL.md` may work, but skill discovery, research, citations, and file tools vary by host. |
@@ -106,7 +106,7 @@ python3 scripts/verify_package.py dist/product-one-pager.zip
 claude plugin validate .
 ```
 
-Claude Code 2.1.89 reports an optional warning because the marketplace omits its optional description for compatibility with this CLI version. No release version has been selected.
+Claude Code 2.1.89 reports an optional warning because the marketplace omits its optional description for compatibility with this CLI version. Claude model invocation remains untested. The current beta release is v0.1.0-beta.
 
 Repository layout:
 
