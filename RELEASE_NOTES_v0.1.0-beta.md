@@ -1,6 +1,6 @@
 # PM One-Pager v0.1.0-beta
 
-Prepared from tested main commit `8e845afa0e37adea9d6eb87a0ccf7005cafa71f2`. This is a draft release note; the release has not been published.
+The successful live Codex test used commit `8e845afa0e37adea9d6eb87a0ccf7005cafa71f2`. The final release-preparation commit is `83b0ad2` (`83b0ad2 Prepare v0.1.0-beta release notes`), which adds the native page-count safeguard and bundled notices. This is a draft release note; the release has not been published.
 
 ## What is included
 
@@ -14,6 +14,10 @@ Prepared from tested main commit `8e845afa0e37adea9d6eb87a0ccf7005cafa71f2`. Thi
 - Claude Code plugin: hosted installation from `main` tested with isolated configuration and cache directories. Claude model invocation is untested.
 - Skills CLI: hosted/default-branch installation tested into an isolated Codex project.
 - ZIP/manual route: package creation and exact-content verification passed.
+
+Installable ZIP checksum (built from final release-preparation commit `83b0ad2`):
+
+`SHA-256  28e832ed9b7d7920da6713e40dd718158e10c568567733efeef210fcb87e0fbd  dist/product-one-pager.zip`
 
 ## Live Codex scenario
 
