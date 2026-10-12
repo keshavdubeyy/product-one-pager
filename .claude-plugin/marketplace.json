@@ -1,0 +1,13 @@
+{
+  "name": "keshav-pm-skills",
+  "owner": {
+    "name": "keshavdubeyy"
+  },
+  "plugins": [
+    {
+      "name": "pm-one-pager",
+      "source": "./",
+      "description": "Create evidence-aware product one-pagers for product investment decisions."
+    }
+  ]
+}
