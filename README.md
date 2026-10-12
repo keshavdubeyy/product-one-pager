@@ -1,63 +1,86 @@
-# Product One-Pager Skill
+# PM One-Pager
 
-An AI skill that helps product managers create or revise an **evidence-based product one-pager** — a concise executive brief that lets a VP of Product, CPO, or engineering leader understand a proposal and decide its next investment step in 2–3 minutes.
+PM One-Pager is an Agent Skill for product managers who need a concise, evidence-aware investment brief for a product, feature, or capability. It separates the user problem from the proposed feature, challenges weak premises, defines a focused MVP and outcome metrics, and recommends whether to proceed, validate, rework, or stop.
 
-The skill challenges the idea, researches alternatives, defines a focused MVP and outcome metrics, and recommends whether to invest further. It is **not** a PRD generator, concept-note writer, or marketing copy tool.
+The skill is intended for early product decisions. It is not a replacement for customer discovery, a full PRD, or marketing copy.
 
----
+## Example invocation
 
-## What It Produces
-
-By default, the skill returns a structured text brief (~650–900 words) with eleven sections:
-
-1. Executive Summary
-2. Problem
-3. Opportunity
-4. Proposed Solution
-5. Target User
-6. Why This Will Win
-7. Business Impact
-8. Success Metrics
-9. MVP & Scope
-10. Key Risks & Assumptions
-11. Recommendation *(Proceed / Proceed with Validation / Rework / Do Not Proceed)*
-
-Ask for a PDF or document when you need a file. File generation depends on the tools available in the host AI assistant. Designed output is not currently implemented.
-
----
-
-## Use
-
-In a host that supports skills, add this repository using that host's documented skill workflow, then invoke it with:
-
-```
-Use $product-one-pager to assess my product idea and create an executive-ready one-pager.
+```text
+Use $product-one-pager to assess an AI-assisted handoff summary for our customer-support product.
 ```
 
-Universal fallback: paste the contents of `SKILL.md` into an AI assistant as instructions, then provide the product and feature idea you want assessed.
+The skill reuses information already in context and asks for only the missing product or feature input. See the [fictional example](examples/illustrative-one-pager.md) for a clearly labeled sample input and illustrative output.
 
-The skill will ask for at most two inputs if they are not already in context:
+## Output and host requirements
 
-1. **Product** — name and brief description
-2. **Feature / idea** — what you want to evaluate
+The default output is a structured text brief of approximately 650–900 words with eleven decision-oriented sections. A PDF or document can be requested when the host provides suitable file-generation tools. Research, source access, and file generation all depend on the host AI assistant's capabilities.
 
-It then fills remaining gaps with explicit working assumptions and produces the brief. You can also ask it to revise an existing draft, challenge the premise, or adjust the recommendation. Research quality, source access, and file generation depend on the tools provided by the host AI assistant.
+Designed or graphically composed output is not implemented.
 
----
+## Installation
 
-## File Structure
+Review `skills/product-one-pager/SKILL.md` before installing it. Skills are instructions that can influence model behavior and tool use.
 
+### Codex repository-local skill
+
+OpenAI's documentation shows repository-scoped Codex skills under `.codex/skills/`. Copy the installable folder into the repository where you want Codex to discover it:
+
+```bash
+mkdir -p .codex/skills
+cp -R /path/to/PM-One-Pager/skills/product-one-pager .codex/skills/product-one-pager
 ```
-product-one-pager/
-├── SKILL.md            # Skill instructions (workflow, evidence rules, output format)
-├── agents/
-│   └── openai.yaml     # Codex UI metadata and invocation policy
-├── README.md           # This file
-└── .gitignore
+
+Then invoke `$product-one-pager` in that repository. See OpenAI's [systematic skill evaluation guide](https://developers.openai.com/blog/eval-skills) for the repo-local layout.
+
+### OpenAI API skill upload
+
+OpenAI's Skills guide accepts either a skill directory or a ZIP containing one top-level skill folder. Build and verify that ZIP locally:
+
+```bash
+python3 scripts/package_skill.py
+python3 scripts/verify_package.py dist/product-one-pager.zip
 ```
 
----
+Upload the resulting archive using the workflow in the official [OpenAI API Skills guide](https://developers.openai.com/api/docs/guides/tools-skills). API access, credentials, and charges are outside this repository.
 
-## Adaptation Note
+### Universal fallback
 
-Adapted from Prompt 01, *"Product One Pager Creation"*, in the AI Prompt Library for Product Managers (MISFIT collection). The eleven-section decision structure is preserved; evidence handling, context reuse, and validation discipline have been strengthened.
+If the host has no skill installation mechanism, paste the contents of `skills/product-one-pager/SKILL.md` into the AI assistant as instructions, then provide the product and feature idea. Tool-dependent research and file output may be unavailable.
+
+## Compatibility status
+
+| Surface | Status | What has been checked |
+| --- | --- | --- |
+| Installable skill folder and ZIP | Tested in this repository | Local scripts validate metadata and structure, build the ZIP, and compare its contents with the source folder. |
+| Codex repository-local skills | Documentation-supported; not end-to-end tested here | The documented `.codex/skills/` layout is used in the installation instructions. |
+| OpenAI API hosted skills | Documentation-supported; not end-to-end tested here | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run is performed. |
+| Other AI assistants | Untested fallback only | Pasting `SKILL.md` may work, but discovery, research, citations, and file tools vary by host. |
+
+Structural checks do not prove model behavior. The scenarios in [tests/behavioral-cases.md](tests/behavioral-cases.md) are review cases for manual runs or a future model-evaluation harness.
+
+## Repository layout
+
+```text
+skills/product-one-pager/   Installable skill and Codex UI metadata
+examples/                   Fictional input and illustrative output
+tests/                      Behavioral review cases
+scripts/                    Dependency-free validation and packaging tools
+.github/workflows/          Push and pull-request validation
+```
+
+## Validate and package
+
+Python 3.9 or later is sufficient; the scripts use only the standard library.
+
+```bash
+python3 scripts/validate_skill.py
+python3 scripts/package_skill.py
+python3 scripts/verify_package.py dist/product-one-pager.zip
+```
+
+## Security, attribution, and licensing
+
+Read [SECURITY.md](SECURITY.md) before reporting a vulnerability. Source attribution and third-party status are recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+No distribution license has been selected for this repository. No license or rights to third-party material are granted by this repository.

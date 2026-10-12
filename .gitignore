@@ -23,6 +23,9 @@ __pycache__/
 dist/
 build/
 
+# Generated skill packages
+*.zip
+
 # Secrets & environment
 .env
 .env.*
