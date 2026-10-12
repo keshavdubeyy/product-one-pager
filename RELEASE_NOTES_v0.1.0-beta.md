@@ -15,7 +15,7 @@ The successful live Codex test used commit `8e845afa0e37adea9d6eb87a0ccf7005cafa
 - Skills CLI: hosted/default-branch installation tested into an isolated Codex project.
 - ZIP/manual route: package creation and exact-content verification passed.
 
-Installable ZIP checksum (built from final release-preparation commit `83b0ad2`):
+Installable ZIP checksum (built from final intended release commit `7d28690`; the packaged skill content was introduced in `83b0ad2`):
 
 `SHA-256  28e832ed9b7d7920da6713e40dd718158e10c568567733efeef210fcb87e0fbd  dist/product-one-pager.zip`
 
