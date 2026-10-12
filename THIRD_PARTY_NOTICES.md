@@ -14,4 +14,6 @@ This repository uses those cues as attributed design inspiration. It does not re
 
 ## Repository license status
 
-No distribution license has been selected for this repository. This notice is not a license and does not grant rights in this repository or any third-party material.
+This repository is released under the MIT License (see LICENSE). The MIT License applies to original contributions only — the repository structure, scripts, README, configuration files, examples, tests, GitHub Actions workflows, and Claude plugin manifests.
+
+The MIT License does **not** apply to the two adapted third-party items described above (the MISFIT collection and the Refero Styles design reference). Those items are included under attribution only. Redistribution rights for that material have not been independently confirmed, and this notice does not grant any such rights. Users are responsible for determining whether their use and redistribution are permitted.

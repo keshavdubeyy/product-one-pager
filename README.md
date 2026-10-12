@@ -2,7 +2,7 @@
 
 ## Your next product idea. A clearer decision.
 
-An AI skill that turns your product or feature idea into one concise, designed investment brief—covering the problem, alternatives, MVP, metrics, risks, and a recommended next step.
+An AI skill that turns your product or feature idea into a concise investment brief—covering the problem, alternatives, MVP, metrics, risks, and a recommended next step.
 
 ## What it helps you do
 
@@ -49,32 +49,24 @@ The skill reuses product and feature details already supplied in the conversatio
 
 ## Example output
 
-The example is fictional and illustrative:
+See the [fictional example input and illustrative output](examples/illustrative-one-pager.md). It demonstrates the structured text format; it is not a designed PDF preview.
 
-- [Editable HTML source](examples/fictional-designed-brief.html)
-- [Landscape PNG static preview](examples/fictional-designed-brief.png) and [PDF export](examples/fictional-designed-brief.pdf)
-- [Portrait PNG static preview](examples/fictional-designed-brief-portrait.png) and [PDF export](examples/fictional-designed-brief-portrait.pdf)
-- [Supporting analysis and full source note](examples/illustrative-one-pager.md)
-
-![Static preview of the fictional RelayDesk product brief](examples/fictional-designed-brief.png)
-
-> **Limitations:** Outputs need review. Research, visual generation, and exports depend on your AI tool. When no editable visual format is available, the skill falls back to editable content and a layout specification.
+> **Limitations:** Outputs need review. Research and file generation depend on your AI tool. The current default output is structured text.
 
 <details>
 <summary><strong>Compatibility and testing status</strong></summary>
 
-| Surface | Status | What has been checked |
-| --- | --- | --- |
-| Claude Code plugin | Installation tested; model invocation untested | Claude Code 2.1.89 added the GitHub marketplace, installed the plugin from `main`, and listed it as enabled using isolated temporary configuration and cache directories. The installed skill matched the repository source. Claude model invocation remains untested because no authenticated Claude session or environment credential was available. |
-| Skills CLI / Codex | Installation and one live model scenario tested | The CLI installed the default-branch skill into an isolated Codex project. A fresh BerthWise / Turnaround Readiness scenario reused supplied context, produced all eleven sections, labeled unsupported assumptions, and recommended Proceed with Validation. Other target agents were not tested. |
-| Designed output routes | Native failure recovery and HTML artifact generation tested | An authenticated Codex run attempted a native Canva design, detected that it produced six slides, rejected it, and fell back to one self-contained HTML brief. Local Chrome rendering produced and visually inspected one landscape PNG and one-page PDF; the HTML reflowed at portrait width. |
-| Installable skill folder and ZIP | Structurally tested | Local scripts validate metadata, eleven required sections, the bundled design reference, local resources, and package contents. |
-| OpenAI API hosted skills | Documentation-supported; not end-to-end tested | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run has been performed. |
-| Other AI assistants | Untested fallback | Pasting `SKILL.md` may work, but skill discovery, research, citations, and file tools vary by host. |
+| Surface                          | Status                                                                  | What has been checked                                                                                                                                                                                                                                                                                                 |
+| -------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Code plugin               | Default-branch installation tested; model invocation unavailable        | Claude Code 2.1.89 added the GitHub marketplace, installed the plugin from `main`, and listed it as enabled using isolated temporary configuration and cache directories. The installed skill matched the repository source. No authenticated Claude session or environment credential was available for a model run. |
+| Skills CLI                       | Default-branch installation tested for Codex; model invocation untested | The CLI discovered one skill from the GitHub repository and installed it into an isolated Codex project. Other target agents were not tested.                                                                                                                                                                         |
+| Installable skill folder and ZIP | Structurally tested                                                     | Local scripts validate metadata, eleven required sections, references, and package contents.                                                                                                                                                                                                                          |
+| OpenAI API hosted skills         | Documentation-supported; not end-to-end tested                          | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run has been performed.                                                                                                                                                                                                |
+| Other AI assistants              | Untested fallback                                                       | Pasting `SKILL.md` may work, but skill discovery, research, citations, and file tools vary by host.                                                                                                                                                                                                                   |
 
 Structural validation does not prove model behavior. The scenarios in [tests/behavioral-cases.md](tests/behavioral-cases.md) are review cases for manual runs or a future model-evaluation harness.
 
-The default result is one designed 16:9 brief with all eleven decision-oriented sections and approximately 300–400 visible words. Portrait 9:16 is available on request. The skill selects a native editable canvas, self-contained HTML/CSS, an editable slide format, a static preview, or a content-plus-layout fallback according to tools that are actually available. It does not require a particular SDK or presentation library.
+The default result is an approximately 650–900-word brief with eleven decision-oriented sections. A PDF or document can be requested when the host has suitable file-generation tools. Designed or graphically composed output is not implemented.
 
 </details>
 
@@ -106,7 +98,7 @@ python3 scripts/verify_package.py dist/product-one-pager.zip
 claude plugin validate .
 ```
 
-Claude Code 2.1.89 reports an optional warning because the marketplace omits its optional description for compatibility with this CLI version. Claude model invocation remains untested. The current beta release is v0.1.0-beta.
+Claude Code 2.1.89 reports an optional warning because the marketplace omits its optional description for compatibility with this CLI version. Current release: **v0.1.0-beta**.
 
 Repository layout:
 
@@ -123,4 +115,4 @@ scripts/                    Dependency-free validation and packaging tools
 
 ---
 
-[Security reporting](SECURITY.md) · [Source attribution and third-party notices](THIRD_PARTY_NOTICES.md) · No distribution license has been selected, and this repository grants no rights to third-party material.
+[Security reporting](SECURITY.md) · [Source attribution and third-party notices](THIRD_PARTY_NOTICES.md) · Released under the MIT License for original contributions. Third-party material (MISFIT collection, Refero Styles design reference) is included under attribution only; redistribution rights for that material have not been independently confirmed.

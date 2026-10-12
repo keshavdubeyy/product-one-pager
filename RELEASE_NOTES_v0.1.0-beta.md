@@ -1,6 +1,6 @@
 # PM One-Pager v0.1.0-beta
 
-The successful live Codex test used commit `8e845afa0e37adea9d6eb87a0ccf7005cafa71f2`. The final release-preparation commit is `83b0ad2` (`83b0ad2 Prepare v0.1.0-beta release notes`), which adds the native page-count safeguard and bundled notices. This is a draft release note; the release has not been published.
+Initial public beta. The successful live Codex test used commit `8e845afa0e37adea9d6eb87a0ccf7005cafa71f2`. The release-preparation commit is `83b0ad2` (`83b0ad2 Prepare v0.1.0-beta release notes`), which adds the native page-count safeguard and bundled notices.
 
 ## What is included
 
@@ -17,7 +17,7 @@ The successful live Codex test used commit `8e845afa0e37adea9d6eb87a0ccf7005cafa
 
 Installable ZIP checksum (built from final intended release commit `7d28690`; the packaged skill content was introduced in `83b0ad2`):
 
-`SHA-256  28e832ed9b7d7920da6713e40dd718158e10c568567733efeef210fcb87e0fbd  dist/product-one-pager.zip`
+`SHA-256  f311a76fd03e7ea389e9c1c2b02800a1d3f6bfad43b8884ca15678836f969ac1  dist/product-one-pager.zip`
 
 ## Live Codex scenario
 
@@ -27,4 +27,6 @@ The run first attempted a Canva native design. Canva returned six slides, which 
 
 ## Limitations
 
-Research, native canvases, rendering, file generation, exports, and model behavior depend on host capabilities and credentials. Claude model invocation remains untested. Structural validation and artifact checks do not prove behavior on every agent. No distribution license has been selected; attribution and notices grant no rights to third-party material.
+Research, native canvases, rendering, file generation, exports, and model behavior depend on host capabilities and credentials. Claude model invocation remains untested. Structural validation and artifact checks do not prove behavior on every agent.
+
+This repository is released under the MIT License for original contributions. The skill content adapted from the MISFIT collection and the design reference adapted from Refero Styles are included under attribution only; redistribution rights for that material have not been independently confirmed. See THIRD_PARTY_NOTICES.md.

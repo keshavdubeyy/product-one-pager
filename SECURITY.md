@@ -14,7 +14,7 @@ Include the affected commit or file, impact, reproduction conditions, and a sugg
 
 ## Supported versions
 
-There are no published releases or versioned support commitments yet. Security fixes, when accepted, will target the current default branch on a best-effort basis.
+The current supported version is **v0.1.0-beta** (tag `v0.1.0-beta`). This is a pre-release. Security fixes, when accepted, will target the current default branch on a best-effort basis.
 
 ## Operational note
 
