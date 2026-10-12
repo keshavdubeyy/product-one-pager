@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -13,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills" / "product-one-pager"
 SKILL_MD = SKILL_DIR / "SKILL.md"
 OPENAI_YAML = SKILL_DIR / "agents" / "openai.yaml"
+CLAUDE_PLUGIN = ROOT / ".claude-plugin" / "plugin.json"
+CLAUDE_MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
 
 SECTIONS = [
     "Executive Summary",
@@ -91,6 +94,51 @@ def validate_sections(skill_text: str) -> None:
         fail(f"expected the eleven numbered sections in order; found: {found}")
 
 
+def read_json(path: Path) -> dict:
+    try:
+        data = json.loads(read_text(path))
+    except json.JSONDecodeError as error:
+        fail(f"invalid JSON in {path.relative_to(ROOT)}: {error}")
+    if not isinstance(data, dict):
+        fail(f"expected a JSON object in {path.relative_to(ROOT)}")
+    return data
+
+
+def validate_claude_packaging() -> None:
+    plugin = read_json(CLAUDE_PLUGIN)
+    marketplace = read_json(CLAUDE_MARKETPLACE)
+
+    if plugin.get("name") != "pm-one-pager":
+        fail("Claude plugin name must be 'pm-one-pager'")
+    if plugin.get("repository") != "https://github.com/keshavdubeyy/product-one-pager":
+        fail("Claude plugin repository URL is missing or incorrect")
+    if plugin.get("skills") != "./skills/":
+        fail("Claude plugin must discover the single source skill through './skills/'")
+    for unsupported in ("hooks", "mcpServers"):
+        if unsupported in plugin:
+            fail(f"Claude plugin must not declare unnecessary {unsupported}")
+
+    skill_scan = (ROOT / plugin["skills"]).resolve()
+    if skill_scan != (ROOT / "skills").resolve() or not skill_scan.is_dir():
+        fail("Claude plugin skills path does not resolve to the repository skills directory")
+
+    if marketplace.get("name") != "keshav-pm-skills":
+        fail("Claude marketplace name must be 'keshav-pm-skills'")
+    entries = marketplace.get("plugins")
+    if not isinstance(entries, list) or len(entries) != 1:
+        fail("Claude marketplace must contain exactly one plugin entry")
+    entry = entries[0]
+    if not isinstance(entry, dict) or entry.get("name") != plugin["name"]:
+        fail("Claude marketplace entry name must match the plugin manifest")
+    if entry.get("source") != "./":
+        fail("Claude marketplace plugin source must be the repository root './'")
+
+    manifests = sorted(ROOT.rglob("SKILL.md"))
+    if manifests != [SKILL_MD]:
+        shown = [str(path.relative_to(ROOT)) for path in manifests]
+        fail(f"SKILL.md must have one source of truth; found: {shown}")
+
+
 def local_markdown_targets(text: str) -> list[str]:
     targets = []
     for target in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", text):
@@ -147,9 +195,13 @@ def main() -> int:
     }
     validate_metadata(skill_text, ui_text)
     validate_sections(skill_text)
+    validate_claude_packaging()
     validate_references(files)
     validate_placeholders(files)
-    print("Validated skill metadata, eleven sections, local references, and placeholders.")
+    print(
+        "Validated skill metadata, eleven sections, Claude packaging, "
+        "local references, and placeholders."
+    )
     return 0
 
 

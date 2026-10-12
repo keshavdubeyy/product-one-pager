@@ -1,0 +1,9 @@
+{
+  "name": "pm-one-pager",
+  "description": "Create evidence-aware product one-pagers for product investment decisions.",
+  "author": {
+    "name": "keshavdubeyy"
+  },
+  "repository": "https://github.com/keshavdubeyy/product-one-pager",
+  "skills": "./skills/"
+}
