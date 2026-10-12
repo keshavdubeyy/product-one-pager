@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Illustrative Product Brief — RelayDesk Handoff Health Check</title>
+  <style>
+    :root {
+      --canvas: #f5f5f5;
+      --paper: #ffffff;
+      --ink: #0a0a0a;
+      --secondary: #525252;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --strong: #171717;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #dedede;
+      color: var(--ink);
+      font-family: Geist, Inter, Arial, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+
+    .slide {
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      padding: 44px 54px 42px;
+      background: var(--canvas);
+      display: grid;
+      grid-template-rows: 158px 1fr 130px;
+      gap: 24px;
+      outline: none;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 48px;
+      align-items: end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .group-title {
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 52px;
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+      font-weight: 650;
+    }
+
+    .summary {
+      font-size: 21px;
+      line-height: 1.32;
+      color: var(--secondary);
+    }
+
+    .summary .section-label {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr 0.96fr;
+      gap: 32px;
+      min-height: 0;
+    }
+
+    .group {
+      min-width: 0;
+      border-top: 4px solid var(--strong);
+      padding-top: 14px;
+    }
+
+    .group-title {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .section { margin-bottom: 14px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.3;
+      color: var(--secondary);
+    }
+
+    .recommendation {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 34px;
+      align-items: center;
+      background: var(--strong);
+      color: white;
+      border-radius: 22px;
+      padding: 22px 28px;
+    }
+
+    .recommendation .section-label,
+    .recommendation p { color: white; }
+
+    .decision {
+      font-size: 30px;
+      font-weight: 650;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-top: 6px;
+    }
+
+    .recommendation p { font-size: 18px; line-height: 1.32; }
+
+    a { color: inherit; text-underline-offset: 3px; }
+
+    .source-note {
+      display: block;
+      margin-top: 7px;
+      color: #d4d4d4;
+      font-size: 14px;
+    }
+
+    body.portrait .slide {
+      width: 900px;
+      height: 1600px;
+      padding: 58px 54px 52px;
+      grid-template-rows: 250px 1fr 210px;
+      gap: 24px;
+    }
+
+    body.portrait .top {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-content: start;
+    }
+
+    body.portrait h1 { font-size: 50px; }
+    body.portrait .summary { font-size: 19px; }
+
+    body.portrait .main-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 34px 30px;
+      align-content: start;
+    }
+
+    body.portrait .group:last-child {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      align-content: start;
+    }
+
+    body.portrait .group:last-child .group-title { grid-column: 1 / -1; }
+    body.portrait p { font-size: 18px; line-height: 1.32; }
+    body.portrait .section-label,
+    body.portrait .group-title { font-size: 17px; }
+    body.portrait .recommendation { grid-template-columns: 1fr; gap: 14px; }
+    body.portrait .recommendation p { font-size: 18px; }
+    body.portrait .source-note { font-size: 12px; }
+
+    @media print {
+      html, body { background: white; }
+      body { padding: 0; }
+      .slide { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="slide" contenteditable="true" spellcheck="true" aria-label="Editable fictional product brief">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Illustrative fictional brief · Draft</div>
+        <h1>RelayDesk Handoff Health Check</h1>
+      </div>
+      <div class="summary">
+        <span class="section-label">1. Executive Summary</span>
+        Check ticket-transfer summaries before handoff so receiving agents can continue without reconstructing the case. The need is plausible but unverified. Validate the problem and a simple checklist before investing in AI.
+      </div>
+    </header>
+
+    <section class="main-grid">
+      <div class="group">
+        <div class="group-title">Problem framing</div>
+        <div class="section">
+          <span class="section-label">2. Problem</span>
+          <p>Under time pressure, agents may omit goals, actions taken, unresolved questions, or commitments. Receiving agents then reread threads or ask customers to repeat context. Frequency and severity are assumptions.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">3. Opportunity</span>
+          <p>A transfer-time check can catch gaps while the sender can still repair them. Strategic fit is credible inside RelayDesk, but demand, incidence, and willingness to adopt remain unknown.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">4. Proposed Solution</span>
+          <p>Show a four-item completeness check before transfer; point to unclear context; let agents edit, override, or mark items not applicable. Do not rewrite or block transfers by default.</p>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">Audience &amp; advantage</div>
+        <div class="section">
+          <span class="section-label">5. Target User</span>
+          <p>Support agents transferring multi-step tickets. Their desired outcome: the next agent can identify and take the next action without rebuilding case history.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">6. Why This Will Win</span>
+          <p>Workflow placement and existing ticket context are plausible advantages. Templates or required fields may solve the problem more cheaply; meaningful competitive differentiation is unverified.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">7. Business Impact</span>
+          <p>Potentially lowers handling cost and improves continuity. Costs include review time, latency, false warnings, inference, and implementation. No baseline supports quantification.</p>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">Test &amp; decide</div>
+        <div class="section">
+          <span class="section-label">8. Success Metrics</span>
+          <p><strong>Primary:</strong> transfers where the receiver can identify the next action without reopening the thread. Track reconstruction time and repeat questions; guard added transfer time and false warnings.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">9. MVP &amp; Scope</span>
+          <p>Run a two-week manual review, then test a no-AI clickable checklist with 8–12 agents. Exclude rewriting, transfer blocking, multilingual checks, and production model integration.</p>
+        </div>
+        <div class="section">
+          <span class="section-label">10. Key Risks &amp; Assumptions</span>
+          <p><strong>Critical assumption:</strong> incomplete summaries frequently cause poor handoffs. Review a representative sample and stop if gaps are uncommon. Human override remains mandatory.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="recommendation">
+      <div>
+        <span class="section-label">11. Recommendation</span>
+        <div class="decision">Proceed with Validation</div>
+      </div>
+      <p>Do not approve production development. First prove that missing context is common, the rubric predicts easier continuation, and agents tolerate the added step. If most handoffs are already complete, change the decision to <strong>Do Not Proceed</strong>.
+        <a class="source-note" href="https://github.com/keshavdubeyy/product-one-pager/blob/main/examples/illustrative-one-pager.md">Supporting analysis and sources → illustrative-one-pager.md</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const portrait = new URLSearchParams(window.location.search).get("orientation") === "portrait";
+    if (portrait) {
+      document.body.classList.add("portrait");
+      const style = document.createElement("style");
+      style.textContent = "@page { size: 7.5in 13.333in; margin: 0; }";
+      document.head.appendChild(style);
+    } else {
+      const style = document.createElement("style");
+      style.textContent = "@page { size: 13.333in 7.5in; margin: 0; }";
+      document.head.appendChild(style);
+    }
+  </script>
+</body>
+</html>

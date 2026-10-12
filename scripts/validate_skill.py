@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import json
 import re
+import struct
 import sys
+from html import unescape
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -14,8 +16,14 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills" / "product-one-pager"
 SKILL_MD = SKILL_DIR / "SKILL.md"
 OPENAI_YAML = SKILL_DIR / "agents" / "openai.yaml"
+DESIGN_REFERENCE = SKILL_DIR / "references" / "design-reference.md"
 CLAUDE_PLUGIN = ROOT / ".claude-plugin" / "plugin.json"
 CLAUDE_MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
+EXAMPLE_HTML = ROOT / "examples" / "fictional-designed-brief.html"
+EXAMPLE_LANDSCAPE_PNG = ROOT / "examples" / "fictional-designed-brief.png"
+EXAMPLE_PORTRAIT_PNG = ROOT / "examples" / "fictional-designed-brief-portrait.png"
+EXAMPLE_LANDSCAPE_PDF = ROOT / "examples" / "fictional-designed-brief.pdf"
+EXAMPLE_PORTRAIT_PDF = ROOT / "examples" / "fictional-designed-brief-portrait.pdf"
 
 SECTIONS = [
     "Executive Summary",
@@ -92,6 +100,88 @@ def validate_sections(skill_text: str) -> None:
     expected = [(str(index), title) for index, title in enumerate(SECTIONS, start=1)]
     if found != expected:
         fail(f"expected the eleven numbered sections in order; found: {found}")
+
+
+def validate_output_contract(skill_text: str, design_text: str) -> None:
+    required_skill_phrases = (
+        "landscape 16:9 by default",
+        "portrait 9:16",
+        "self-contained HTML/CSS slide",
+        "Static preview",
+        "no visual generation is available",
+        "Never describe a raster image as editable",
+        "references/design-reference.md",
+    )
+    for phrase in required_skill_phrases:
+        if phrase not in skill_text:
+            fail(f"SKILL.md is missing output-contract language: {phrase!r}")
+
+    required_design_phrases = (
+        "Refero Styles",
+        "not an official shadcn design-system specification",
+        "#F5F5F5",
+        "#FFFFFF",
+        "#0A0A0A",
+        "#E7000B",
+        "Shorten copy before reducing type",
+        "Problem framing",
+        "Audience and advantage",
+        "Test and decide",
+    )
+    for phrase in required_design_phrases:
+        if phrase not in design_text:
+            fail(f"design reference is missing required guidance: {phrase!r}")
+
+
+def png_dimensions(path: Path) -> tuple[int, int]:
+    try:
+        data = path.read_bytes()
+    except FileNotFoundError:
+        fail(f"missing rendered example: {path.relative_to(ROOT)}")
+    if len(data) < 24 or data[:8] != b"\x89PNG\r\n\x1a\n":
+        fail(f"invalid PNG example: {path.relative_to(ROOT)}")
+    return struct.unpack(">II", data[16:24])
+
+
+def validate_examples() -> None:
+    html = unescape(read_text(EXAMPLE_HTML))
+    for index, title in enumerate(SECTIONS, start=1):
+        if f"{index}. {title}" not in html:
+            fail(f"designed HTML example is missing section {index}: {title}")
+    for phrase in (
+        'contenteditable="true"',
+        "width: 1600px",
+        "height: 900px",
+        "width: 900px",
+        "height: 1600px",
+        'get("orientation") === "portrait"',
+        "@media print",
+        "illustrative-one-pager.md",
+    ):
+        if phrase not in html:
+            fail(f"designed HTML example is missing: {phrase!r}")
+
+    if png_dimensions(EXAMPLE_LANDSCAPE_PNG) != (1600, 900):
+        fail("landscape PNG preview must be exactly 1600x900")
+    if png_dimensions(EXAMPLE_PORTRAIT_PNG) != (900, 1600):
+        fail("portrait PNG preview must be exactly 900x1600")
+
+    expected_pdf_geometry = {
+        EXAMPLE_LANDSCAPE_PDF: b"/MediaBox [0 0 960 540]",
+        EXAMPLE_PORTRAIT_PDF: b"/MediaBox [0 0 540 960]",
+    }
+    source_url = b"https://github.com/keshavdubeyy/product-one-pager/blob/main/examples/illustrative-one-pager.md"
+    for path, media_box in expected_pdf_geometry.items():
+        try:
+            data = path.read_bytes()
+        except FileNotFoundError:
+            fail(f"missing PDF example: {path.relative_to(ROOT)}")
+        if data[:5] != b"%PDF-":
+            fail(f"invalid PDF example: {path.relative_to(ROOT)}")
+        if b"/Count 1" not in data or media_box not in data:
+            fail(f"PDF example must contain one page at the intended aspect ratio: {path.name}")
+        if source_url not in data:
+            fail(f"PDF example is missing its portable supporting-analysis link: {path.name}")
 
 
 def read_json(path: Path) -> dict:
@@ -188,6 +278,7 @@ def validate_placeholders(files: dict[Path, str]) -> None:
 def main() -> int:
     skill_text = read_text(SKILL_MD)
     ui_text = read_text(OPENAI_YAML)
+    design_text = read_text(DESIGN_REFERENCE)
     files = {
         path: read_text(path)
         for path in sorted(SKILL_DIR.rglob("*"))
@@ -195,12 +286,14 @@ def main() -> int:
     }
     validate_metadata(skill_text, ui_text)
     validate_sections(skill_text)
+    validate_output_contract(skill_text, design_text)
     validate_claude_packaging()
     validate_references(files)
     validate_placeholders(files)
+    validate_examples()
     print(
-        "Validated skill metadata, eleven sections, Claude packaging, "
-        "local references, and placeholders."
+        "Validated skill metadata, eleven sections, designed-output contract, "
+        "Claude packaging, local references, placeholders, and example artifacts."
     )
     return 0
 

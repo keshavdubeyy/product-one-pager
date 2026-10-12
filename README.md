@@ -2,7 +2,7 @@
 
 ## Your next product idea. A clearer decision.
 
-An AI skill that turns your product or feature idea into a concise investment brief—covering the problem, alternatives, MVP, metrics, risks, and a recommended next step.
+An AI skill that turns your product or feature idea into one concise, designed investment brief—covering the problem, alternatives, MVP, metrics, risks, and a recommended next step.
 
 ## What it helps you do
 
@@ -49,9 +49,16 @@ The skill reuses product and feature details already supplied in the conversatio
 
 ## Example output
 
-See the [fictional example input and illustrative output](examples/illustrative-one-pager.md). It demonstrates the structured text format; it is not a designed PDF preview.
+The example is fictional and illustrative:
 
-> **Limitations:** Outputs need review. Research and file generation depend on your AI tool. The current default output is structured text.
+- [Editable HTML source](examples/fictional-designed-brief.html)
+- [Landscape PNG static preview](examples/fictional-designed-brief.png) and [PDF export](examples/fictional-designed-brief.pdf)
+- [Portrait PNG static preview](examples/fictional-designed-brief-portrait.png) and [PDF export](examples/fictional-designed-brief-portrait.pdf)
+- [Supporting analysis and full source note](examples/illustrative-one-pager.md)
+
+![Static preview of the fictional RelayDesk product brief](examples/fictional-designed-brief.png)
+
+> **Limitations:** Outputs need review. Research, visual generation, and exports depend on your AI tool. When no editable visual format is available, the skill falls back to editable content and a layout specification.
 
 <details>
 <summary><strong>Compatibility and testing status</strong></summary>
@@ -60,13 +67,14 @@ See the [fictional example input and illustrative output](examples/illustrative-
 | --- | --- | --- |
 | Claude Code plugin | Default-branch installation tested; model invocation unavailable | Claude Code 2.1.89 added the GitHub marketplace, installed the plugin from `main`, and listed it as enabled using isolated temporary configuration and cache directories. The installed skill matched the repository source. No authenticated Claude session or environment credential was available for a model run. |
 | Skills CLI | Default-branch installation tested for Codex; model invocation untested | The CLI discovered one skill from the GitHub repository and installed it into an isolated Codex project. Other target agents were not tested. |
-| Installable skill folder and ZIP | Structurally tested | Local scripts validate metadata, eleven required sections, references, and package contents. |
+| HTML example and exports | Artifact generation tested; live model behavior untested | The self-contained HTML was rendered with local headless Chrome in landscape and portrait. Both PNG previews were visually inspected; both PDFs contain exactly one page at the intended aspect ratio. |
+| Installable skill folder and ZIP | Structurally tested | Local scripts validate metadata, eleven required sections, the bundled design reference, local resources, and package contents. |
 | OpenAI API hosted skills | Documentation-supported; not end-to-end tested | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run has been performed. |
 | Other AI assistants | Untested fallback | Pasting `SKILL.md` may work, but skill discovery, research, citations, and file tools vary by host. |
 
 Structural validation does not prove model behavior. The scenarios in [tests/behavioral-cases.md](tests/behavioral-cases.md) are review cases for manual runs or a future model-evaluation harness.
 
-The default result is an approximately 650–900-word brief with eleven decision-oriented sections. A PDF or document can be requested when the host has suitable file-generation tools. Designed or graphically composed output is not implemented.
+The default result is one designed 16:9 brief with all eleven decision-oriented sections and approximately 300–400 visible words. Portrait 9:16 is available on request. The skill selects a native editable canvas, self-contained HTML/CSS, an editable slide format, a static preview, or a content-plus-layout fallback according to tools that are actually available. It does not require a particular SDK or presentation library.
 
 </details>
 

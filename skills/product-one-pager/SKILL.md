@@ -45,9 +45,32 @@ If research access is unavailable or reliable evidence is missing, say so briefl
 
 Avoid market sizing unless it materially affects the decision. For estimates, show a compact formula, units, time horizon, and assumptions; use ranges where warranted. Keep proposed targets separate from measured baselines. Never invent either to make the document look complete.
 
-## Write the brief
+## Design the brief
 
-Use a product/feature title and draft status. Default to approximately 650–900 words excluding sources, with all eleven sections below in order. Keep sections short; use compact tables only when helpful. Deliver in chat unless a file or destination is requested. For PDF or document output, use the relevant artifact skill, follow its saving workflow, and verify the rendered result fits 1–2 legible pages. Do not force a one-page layout by shrinking text.
+Complete the full assessment before condensing it. Then produce one designed product brief, landscape 16:9 by default or portrait 9:16 when the user explicitly requests portrait. Keep all eleven numbered section labels visible and in order. Target approximately 300–400 visible words, reducing further when readability requires it. Preserve material uncertainty, evidence labels, the critical assumption, and the condition that would change the recommendation. Put supporting analysis, calculations, and full sources in editable notes or a companion Markdown file when they do not fit legibly.
+
+Before choosing a format, inspect the host's actual available capabilities and use the first viable route:
+
+1. Prefer a native editable canvas or visual artifact when available. Provide a portable export when the host supports one.
+2. Otherwise create a self-contained HTML/CSS slide with editable text, a fixed aspect ratio, responsive portrait reflow, and print styling. Keep assets embedded or local so the source remains portable.
+3. Use an editable slide format only when the available tools support creating and verifying it.
+4. Offer PDF or PNG exports alongside the editable source only when those exports can actually be created and checked.
+5. If only image generation is available, label the image **Static preview** and provide the structured eleven-section content separately in editable text.
+6. If no visual generation is available, provide the complete content and a layout specification, and state clearly that visual rendering was unavailable.
+
+Never describe a raster image as editable. Never claim that a canvas, file, preview, or export exists unless it was created. Do not require a particular SDK, presentation library, or artifact skill. State any format or tooling limitation plainly.
+
+Apply design systems in this order:
+
+1. Follow explicit user design instructions and supplied templates.
+2. Otherwise inspect accessible project files for design tokens, themes, typography, components, and templates. Reuse the established system without changing application files.
+3. If neither is usable, follow [references/design-reference.md](references/design-reference.md). This bundled fallback records reusable cues adapted from Refero; it does not require fetching the source on every run and is not an official shadcn specification.
+
+Use a title and executive-summary band at the top, a balanced content grid, and a prominent recommendation area. Group related sections visually rather than making eleven identical cards. Reflow the composition for portrait instead of rotating or uniformly scaling the landscape layout. Shorten copy before shrinking typography.
+
+Use compact numbered citations with clickable links for consequential external claims when the chosen format supports links. Keep a concise source pointer on the designed brief and full source details in notes or the companion file. If links are unsupported, preserve the numbered markers and URLs in the companion content.
+
+Use a product/feature title and draft status. The eleven sections are:
 
 ### 1. Executive Summary
 Use 3–5 lines to state the proposal, target user, problem, value, and recommended next investment step. Make the recommendation understandable without reading the rest.
@@ -83,7 +106,7 @@ Include the top 3–5 as **Risk/assumption → Impact → Validation**. Highligh
 Choose **Proceed / Proceed with Validation / Rework / Do Not Proceed**. Explain supporting evidence and uncertainty, what must be proven next, and the immediate action. Specify what result would change the decision. Match the next investment to evidence strength; distinguish approval to validate from approval to build or launch.
 
 ### Sources
-Include only consequential sources, with identifiable titles, links when available, and dates where freshness matters. Keep this outside the eleven numbered sections. If external sources were inaccessible, state the limitation rather than generating a source list.
+Include only consequential sources, with identifiable titles, links when available, and dates where freshness matters. Keep this outside the eleven numbered sections, in editable notes or a companion Markdown file when necessary. If external sources were inaccessible, state the limitation rather than generating a source list.
 
 ## Check before delivering
 
@@ -94,5 +117,9 @@ Include only consequential sources, with identifiable titles, links when availab
 - Confirm the critical assumption has an actionable test and decision criterion.
 - Keep detailed user stories, architecture, competitor matrices, and roadmaps out of the brief.
 - Make the draft self-contained for a leader who has not seen the conversation.
+- Confirm the output is exactly one designed brief slide and uses the requested orientation.
+- Confirm every section label is visible and the reading order is clear.
+- Check clipping, overlap, contrast, font substitution, citation links, and print/export behavior when tools permit.
+- Confirm each delivered file exists and distinguish editable source from static previews and exports.
 
 Adapted from Prompt 01, “Product One Pager Creation,” in the user-supplied AI Prompt Library for Product Managers (MISFIT collection). Preserve its eleven-section decision structure while strengthening evidence handling, context reuse, and validation discipline.

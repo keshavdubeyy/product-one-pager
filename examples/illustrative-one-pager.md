@@ -2,6 +2,8 @@
 
 Everything below is fictional. The input is a demonstration prompt, and the output is illustrative rather than research-backed product advice.
 
+This file preserves the supporting assessment behind the designed example. View the [editable HTML brief](fictional-designed-brief.html), its [landscape static preview](fictional-designed-brief.png), or the [portrait static preview](fictional-designed-brief-portrait.png). The PNG files are previews, not editable deliverables.
+
 ## Example input
 
 **Product:** RelayDesk, a fictional customer-support workspace used by mid-sized software companies.
