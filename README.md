@@ -75,7 +75,7 @@ Universal fallback: paste the contents of `skills/product-one-pager/SKILL.md` in
 
 | Surface | Status | What has been checked |
 | --- | --- | --- |
-| Claude Code plugin | Installation tested; model invocation untested | Claude Code 2.1.89 validated the manifests with optional-field warnings, then added the marketplace, installed the plugin, and listed it as enabled using isolated temporary config and cache directories. |
+| Claude Code plugin | Hosted installation tested; model invocation unavailable | Claude Code 2.1.89 added `keshavdubeyy/product-one-pager@chore/professional-distribution` from GitHub, installed the plugin at commit `e79fc48`, and listed it as enabled using isolated temporary config and cache directories. The installed `SKILL.md` matched the repository source. No authenticated Claude session or environment credential was available for a model run. |
 | Skills CLI | Installation tested for Codex target; model invocation untested | The exact GitHub source command and the current local layout each discovered one skill and installed it into isolated project directories. Other target agents were not tested. |
 | Installable skill folder and ZIP | Tested in this repository | Local scripts validate metadata and structure, build the ZIP, and compare its contents with the source folder. |
 | OpenAI API hosted skills | Documentation-supported; not end-to-end tested here | The ZIP follows the documented single-top-level-folder shape. No authenticated upload or model run is performed. |
