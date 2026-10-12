@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node / npm (in case tooling is added later)
+node_modules/
+npm-debug.log*
+
+# Python (in case scripts are added)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Secrets & environment
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# OS temp files
+Thumbs.db
+ehthumbs.db
